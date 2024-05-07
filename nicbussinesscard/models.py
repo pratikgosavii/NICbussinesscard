@@ -3,9 +3,6 @@ from django.db import models
 
 from datetime import datetime, timezone
 
-import pytz
-ist = pytz.timezone('Asia/Kolkata')
-
 
 
 
