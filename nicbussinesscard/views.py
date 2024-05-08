@@ -94,10 +94,12 @@ def list_client(request):
 
 def show_card(request, user_id):
 
-    # data = client.objects.get(id=1)
+    data = client.objects.get(id=user_id)
+
     context = {
-        'data': 'data'
+        'data': data
     }
+
     return render(request, 'card.html', context)
 
 
