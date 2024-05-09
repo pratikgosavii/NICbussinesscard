@@ -7,14 +7,7 @@
 
 <style>
 
-    .copy_b {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
+   
     
 </style>
 
@@ -94,9 +87,10 @@
                                 <td>{{ i.address_link }}</td>
                                 <td>{{ i.date }}</td>
                                 
-                                <td>  
+                                <td style="display: flex;
+                                gap: 12px;">  
 
-                                    <button id="payment-button" onclick="copyToClipboard('https://bussinessnicecard.pythonanywhere.com/showcard/{{ i.id }}')" type="button" class="copy_b">
+                                    <button id="payment-button" class="btn-info " style="background-color: #343a40;" onclick="copyToClipboard('https://bussinessnicecard.pythonanywhere.com/showcard/{{ i.id }}')" type="button">
                                         <span id="payment-button-amount">Copy</span>
                                     </button>
                                     
