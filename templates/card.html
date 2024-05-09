@@ -39,6 +39,31 @@
       border-radius: 12px;
   }
 
+  .home-3 .bostami-header-area {
+    margin-bottom: 0px;
+}
+
+.btn-2{
+    background: linear-gradient(97deg, #272c33, #0d6efd);
+}
+
+
+.home-3 .bostami-parsonal-info-contact-item .icon:hover, .home-3 .bostami-parsonal-info-social-link li a:hover {
+    background: linear-gradient(97deg, #272c33, #0d6efd);
+}
+
+
+.bostami-parsonal-info-social-link {
+    width: 255px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 7.5px;
+    margin: 0 auto 30px;
+}
+
+
+
 
     </style> 
 
@@ -53,7 +78,7 @@
             <div class="container">
                 <div class="bostami-header-wrap">
                     <div class="row">
-                        <div class="col-6">
+                        {% comment %} <div class="col-6">
                             <div class="bostami-header-logo">
                               <a class="site-logo" href="/">
                                 <img alt="logo" loading="lazy" width="153" height="32" decoding="async" data-nimg="1" style="color:transparent"
@@ -63,7 +88,7 @@
                             </a>
                             
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                         {% comment %} <div class="col-6">
                             <div class="bostami-header-menu-btn text-right mb-0">
                                 <div class="dark-btn mode-btn"><i class="moonicon fa-solid fa-moon"></i></div>
@@ -95,45 +120,90 @@
                     <div class="bostami-parsonal-info-area">
                         <div class="bostami-parsonal-info-wrap">
                           <div class="bostami-parsonal-info-img">
-                            <img alt="author" loading="lazy" width="240" height="240" decoding="async" data-nimg="1" style="color:transparent"
-                            srcset="{% static '_next/parson-img-3cbc5.png' %}?w=256&q=75 1x,
-                                    {% static '_next/parson-img-3cbc5.png' %}?w=640&q=75 2x"
-                            src="{% static '_next/parson-img-3cbc5.png' %}?w=640&q=75">
+
+                            {% if data.photo.url %}
+
+                                <img alt="author" loading="lazy" width="240" height="240" decoding="async" data-nimg="1" style="color:transparent"
+                                srcset="{{ data.photo.url }}?w=256&q=75 1x,
+                                        {{ data.photo.url }}?w=640&q=75 2x"
+                                src="{{ data.photo.url }}?w=640&q=75">
+
+                            {% else %}
+
+                                <img alt="author" loading="lazy" width="240" height="240" decoding="async" data-nimg="1" style="color:transparent"
+                                srcset="{% static '_next/images.png' %}?w=256&q=75 1x,
+                                        {% static '_next/images.png' %}?w=640&q=75 2x"
+                                src="{% static '_next/images.png' %}?w=640&q=75">
+
+                            {% endif %}
+
                        
                         </div>
                         
-                            <h4 class="bostami-parsonal-info-name"><a href="#">Monalisa Ashley</a></h4><span class="bostami-parsonal-info-bio mb-15">Ui/Ux Designer</span>
+                            <h4 class="bostami-parsonal-info-name"><a href="#">{{ data.name }}</a>
+
+                                {% if data.company_name %}
+                                    </h4><span class="bostami-parsonal-info-bio mb-15">{{ data.company_name }}</span> </br>
+                                {% endif %}
+
+                                {% if data.desigination %}
+                                    </h4><span class="bostami-parsonal-info-bio mb-15">{{ data.desigination }}</span>
+                                {% endif %}
+
+
                             <ul class="bostami-parsonal-info-social-link mb-30">
-                                <li><a style="color:#1773EA" href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a style="color:#1C9CEA" href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                                <li><a style="color:#e12a72" href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                <li><a style="color:#144679" href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+
+                                {% if data.facebook %}
+                                <li><a style="color:#1773EA" href="{{ data.facebook }}"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                {% endif %}
+                                {% if data.twitter %}
+                                <li><a style="color:#1C9CEA" href="{{ data.twitter }}"><i class="fa-brands fa-twitter"></i></a></li>
+                                {% endif %}
+                                {% if data.instagram %}
+                                <li><a style="color:#e12a72" href="{{ data.instagram }}"><i class="fa-brands fa-instagram"></i></a></li>
+                                {% endif %}
+                                {% if data.linkdin %}
+                                <li><a style="color:#144679" href="{{ data.linkdin }}"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                {% endif %}
+                                {% if data.website1 %}
+                                <li><a style="color: grey;" href="{{ data.website1 }}"><i class="fa fa-globe" aria-hidden="true"></i></a></li>
+                                {% endif %}
                             </ul>
                             <div class="bostami-parsonal-info-contact mb-30">
+
+                                {% if data.mobile_no %}
+
                                 <div class="bostami-parsonal-info-contact-item">
                                     <div style="color:#E93B81;font-size:22px" class="icon"><i class="fa-regular fa-mobile"></i></div>
                                     <div class="text"><span>Phone</span>
-                                        <p>+123 456 7890</p>
+                                        <p>{{ data.mobile_no }}</p>
                                     </div>
                                 </div>
+
+                                {% endif %}
+
+                                {% if data.mail %}
+
                                 <div class="bostami-parsonal-info-contact-item">
                                     <div style="color:#6AB5B9;font-size:22px" class="icon"><i class="fa-regular fa-envelope-open-text"></i></div>
                                     <div class="text"><span>Email</span>
-                                        <p>example@mail.com</p>
+                                        <p>{{ data.mail }}</p>
                                     </div>
                                 </div>
+
+                                {% endif %}
+
+                                {% if data.address %}
+
                                 <div class="bostami-parsonal-info-contact-item">
                                     <div style="color:#FD7590;font-size:22px" class="icon"><i class="fa-solid fa-location-dot"></i></div>
                                     <div class="text"><span>Location</span>
-                                        <p>Hong kong china</p>
+                                        <p>{{ data.address }}</p>
                                     </div>
                                 </div>
-                                <div class="bostami-parsonal-info-contact-item">
-                                    <div style="color:#C17CEB;font-size:22px" class="icon"><i class="fa-light fa-calendar-days"></i></div>
-                                    <div class="text"><span>Birthday</span>
-                                        <p>May 27, 1990</p>
-                                    </div>
-                                </div>
+
+                                {% endif %}
+                                
                             </div>
                             <div class="bostami-parsonal-info-btn"><a class="btn-2" onclick="saveContact()"><span style="color:#fff" class="icon"><i class="fa-regular fa-download"></i></span>Save Details</a></div>
                         </div>
@@ -145,7 +215,6 @@
     </div>
 
     
-    <script src="/_next/static/chunks/webpack-5354a9fdf018b777.js" crossorigin="" async=""></script>
     <script>
         (self.__next_f = self.__next_f || []).push([0]);
         self.__next_f.push([2, null])
@@ -180,6 +249,8 @@
   <script>
 
 
+
+    
     function saveContact() {
       // Define contact details
       var contact = {
@@ -210,6 +281,55 @@ END:VCARD`;
       downloadLink.setAttribute('download', 'contact.vcf');
       downloadLink.click();
   }
+
+
+  
+  
+
+    function saveContactsd() {
+        // Define contact details
+
+
+
+        const contact = {
+            name: "{{ data.name }}",
+            email: "{{ data.mail }}",
+            phone: "{{ data.mobile_no }}",
+            instagram: "{{ data.instagram }}",
+            twitter: "{{ data.twitter }}",
+            facebook: "{{ data.facebook }}",
+            linkdin: "{{ data.linkdin }}",
+            website: "{{ data.website1 }}",
+            photoUrl: "{{ data.photo.url }}",
+
+        };
+
+        
+    
+        // Create a vCard file
+        const vcard = `BEGIN:VCARD
+    VERSION:3.0
+    FN:${contact.name}
+    TEL;TYPE=work,voice:${contact.phone}
+    EMAIL:${contact.email}
+    URL;TYPE=INSTAGRAM:${contact.instagram}
+    URL;TYPE=TWITTER:${contact.twitter}
+    URL;TYPE=TWITTER:${contact.twitter}
+    URL;TYPE=FACEBOOK:${contact.facebook}
+    URL;TYPE=LINKEDIN:${contact.linkedin}
+    URL:TYPE=WEBSITE${contact.website}
+    END:VCARD`;
+    
+        // Create a Blob object from the vCard file
+        var vCardData = encodeURIComponent(vcard);
+  
+        // Create download link
+        var downloadLink = document.createElement('a');
+        downloadLink.setAttribute('href', 'data:text/vcard;charset=utf-8,' + vCardData);
+        downloadLink.setAttribute('download', 'contact.vcf');
+        downloadLink.click();
+    }
+    
 
 
 </script>
