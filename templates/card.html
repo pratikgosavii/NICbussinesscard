@@ -183,33 +183,40 @@
 
     function saveContact() {
       // Define contact details
-      var contact = {
-          "firstName": "John",
-          "lastName": "Doe",
-          "phone": "+1234567890",
-          "email": "john@example.com",
-          "instagram": "username",
-          "twitter": "username"
-      };
+      const contactForm = document.querySelector("#contact-form");
 
-      // Generate vCard content
-      var vCard = `BEGIN:VCARD
-VERSION:3.0
-FN:${contact.firstName} ${contact.lastName}
-TEL:${contact.phone}
-EMAIL:${contact.email}
-URL;TYPE=INSTAGRAM:http://www.instagram.com/${contact.instagram}
-URL;TYPE=TWITTER:http://www.twitter.com/${contact.twitter}
+
+  const name = 'dfdf';
+  const email = 'sdsds@fs.c';
+  const phone = '343434';
+
+  // Create a vCard file
+  const vcard = `BEGIN:VCARD
+VERSION:4.0
+FN:${name}
+TEL;TYPE=work,voice:${phone}
+EMAIL:${email}
 END:VCARD`;
 
-      // Encode vCard data
-      var vCardData = encodeURIComponent(vCard);
+  // Create a Blob object from the vCard file
+  const blob = new Blob([vcard], { type: "text/vcard" });
 
-      // Create download link
-      var downloadLink = document.createElement('a');
-      downloadLink.setAttribute('href', 'data:text/vcard;charset=utf-8,' + vCardData);
-      downloadLink.setAttribute('download', 'contact.vcf');
-      downloadLink.click();
+  // Create a URL object from the Blob object
+  const url = URL.createObjectURL(blob);
+
+  // Create a download link
+  const downloadLink = document.createElement("a");
+  downloadLink.href = url;
+  downloadLink.download = `${name}.vcf`;
+
+  // Append the download link to the body of the document
+  document.body.appendChild(downloadLink);
+
+  // Click the download link to save the contact card
+  downloadLink.click();
+
+  // Remove the download link from the body of the document
+  document.body.removeChild(downloadLink);
   }
 
   function saveContact2() {
