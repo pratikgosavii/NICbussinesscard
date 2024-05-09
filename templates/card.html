@@ -257,8 +257,6 @@
             "lastName": "Doe",
             "phone": "+1234567890",
             "email": "john@example.com",
-            "instagram": "username",
-            "twitter": "username"
         };
   
         // Generate vCard content
@@ -267,8 +265,6 @@
   FN:${contact.firstName} ${contact.lastName}
   TEL:${contact.phone}
   EMAIL:${contact.email}
-  URL;TYPE=INSTAGRAM:http://www.instagram.com/${contact.instagram}
-  URL;TYPE=TWITTER:http://www.twitter.com/${contact.twitter}
   END:VCARD`;
   
         // Encode vCard data
