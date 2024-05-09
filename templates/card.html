@@ -136,6 +136,7 @@
                                 </div>
                             </div>
                             <div class="bostami-parsonal-info-btn"><a class="btn-2" onclick="saveContact()"><span style="color:#fff" class="icon"><i class="fa-regular fa-download"></i></span>Save Details</a></div>
+                            <div class="bostami-parsonal-info-btn"><a class="btn-2" onclick="saveContact2()"><span style="color:#fff" class="icon"><i class="fa-regular fa-download"></i></span>Save Details</a></div>
                         </div>
                     </div>
                 </div>
@@ -181,14 +182,69 @@
 
 
     function saveContact() {
-      // Define contact details
-      // Construct the deep link with prefilled values as parameters
-      var deepLink = "contacts://create?firstName=John&lastName=Doe&phone=1234567890&email=john@example.com";
+        // Sample contact details
+        const contact = {
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            phone: '+1234567890',
+        };
+    
+        // Create a vCard string
+        const vCard = `BEGIN:VCARD
+    VERSION:3.0
+    FN:${contact.name}
+    EMAIL:${contact.email}
+    TEL:${contact.phone}
+    END:VCARD`;
+    
+        // Create a Blob with the vCard string
+        const blob = new Blob([vCard], { type: 'text/vcard' });
+    
+        // Create a URL for the Blob
+        const url = window.URL.createObjectURL(blob);
+    
+        // Use the Web Share API if available, otherwise provide a download link
+        if (navigator.share) {
+            navigator.share({
+                files: [blob],
+                title: 'Contact',
+                text: 'Download contact',
+            })
+            .then(() => console.log('Share successful'))
+            .catch((error) => console.log('Share failed', error));
+        } else {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'contact.vcf';
+            a.click();
+        }
+    
+        // Clean up
+        setTimeout(() => window.URL.revokeObjectURL(url), 100);
+    }
 
-      // Open the deep link
-      window.location.href = deepLink;
-  }
-
+    function saveContact2() {
+        // Sample contact details
+        const contact = {
+            displayName: 'John Doe',
+            phoneNumbers: [{type: 'mobile', value: '+1234567890'}],
+            emails: [{type: 'work', value: 'john.doe@example.com'}]
+        };
+    
+        // Check if the browser supports the Contacts API
+        if ('contacts' in navigator) {
+            // Use the Contacts API to create a new contact
+            navigator.contacts.save(contact)
+                .then(() => {
+                    alert('Contact saved successfully');
+                })
+                .catch((error) => {
+                    alert('Failed to save contact: ' + error);
+                });
+        } else {
+            alert('Contacts API is not supported in this browser.');
+        }
+    }
 
 </script>
 
