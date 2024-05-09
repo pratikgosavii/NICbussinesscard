@@ -237,65 +237,78 @@
 
 
     function saveContact() {
-      // Define contact details
-      const contactForm = document.querySelector("#contact-form");
+        // Define contact details
 
 
-  const name = 'dfdf';
-  const email = 'sdsds@fs.c';
-  const phone = '343434';
+        {% if data.photo.url %}
 
-  // Create a vCard file
-  const vcard = `BEGIN:VCARD
-VERSION:4.0
-FN:${name}
-TEL;TYPE=work,voice:${phone}
-EMAIL:${email}
-END:VCARD`;
+        const contact = {
+            name: "{{ data.name }}",
+            email: "{{ data.mail }}",
+            phone: "{{ data.mobile_no }}",
+            instagram: "{{ data.instagram }}",
+            twitter: "{{ data.twitter }}"
+            facebook: "{{ data.facebook }}"
+            linkdin: "{{ data.linkdin }}"
+            website: "{{ data.website1 }}"
+            photoUrl: "{{ data.photo.url }}"
 
-  // Create a Blob object from the vCard file
-  const blob = new Blob([vcard], { type: "text/vcard" });
+        };
 
-  // Create a URL object from the Blob object
-  const url = URL.createObjectURL(blob);
+        {% else %}
 
-  // Create a download link
-  const downloadLink = document.createElement("a");
-  downloadLink.href = url;
-  downloadLink.download = `${name}.vcf`;
+        const contact = {
+            name: "{{ data.name }}",
+            email: "{{ data.mail }}",
+            phone: "{{ data.mobile_no }}",
+            instagram: "{{ data.instagram }}",
+            twitter: "{{ data.twitter }}"
+            facebook: "{{ data.facebook }}"
+            linkdin: "{{ data.linkdin }}"
+            website: "{{ data.website1 }}"
+            photoUrl: ""
 
-  // Append the download link to the body of the document
-  document.body.appendChild(downloadLink);
 
-  // Click the download link to save the contact card
-  downloadLink.click();
+        };
 
-  // Remove the download link from the body of the document
-  document.body.removeChild(downloadLink);
-  }
-
-  function saveContact2() {
-    // Sample contact details
-    const contact = {
-        displayName: 'John Doe',
-        phoneNumbers: [{type: 'mobile', value: '+1234567890'}],
-        emails: [{type: 'work', value: 'john.doe@example.com'}]
-    };
-
-    // Check if the browser supports the Contacts API
-    if ('contacts' in navigator) {
-        // Use the Contacts API to create a new contact
-        navigator.contacts.save(contact)
-            .then(() => {
-                alert('Contact saved successfully');
-            })
-            .catch((error) => {
-                alert('Failed to save contact: ' + error);
-            });
-    } else {
-        alert('Contacts API is not supported in this browser.');
+        {% endif %}
+    
+        // Create a vCard file
+        const vcard = `BEGIN:VCARD
+    VERSION:4.0
+    FN:${contact.name}
+    TEL;TYPE=work,voice:${contact.phone}
+    EMAIL:${contact.email}
+    URL;TYPE=INSTAGRAM:${contact.instagram}
+    URL;TYPE=TWITTER:${contact.twitter}
+    URL;TYPE=TWITTER:${contact.twitter}
+    URL;TYPE=FACEBOOK:${contact.facebook}
+    URL;TYPE=LINKEDIN:${contact.linkedin}
+    URL:TYPE=WEBSITE${contact.website}
+    PHOTO;VALUE=URL:${contact.photoUrl}
+    END:VCARD`;
+    
+        // Create a Blob object from the vCard file
+        const blob = new Blob([vcard], { type: "text/vcard" });
+    
+        // Create a URL object from the Blob object
+        const url = URL.createObjectURL(blob);
+    
+        // Create a download link
+        const downloadLink = document.createElement("a");
+        downloadLink.href = url;
+        downloadLink.download = `${contact.name}.vcf`;
+    
+        // Append the download link to the body of the document
+        document.body.appendChild(downloadLink);
+    
+        // Click the download link to save the contact card
+        downloadLink.click();
+    
+        // Remove the download link from the body of the document
+        document.body.removeChild(downloadLink);
     }
-}
+    
 
 
 </script>
