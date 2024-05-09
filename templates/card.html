@@ -51,6 +51,20 @@
 .home-3 .bostami-parsonal-info-contact-item .icon:hover, .home-3 .bostami-parsonal-info-social-link li a:hover {
     background: linear-gradient(97deg, #272c33, #0d6efd);
 }
+
+
+.bostami-parsonal-info-social-link {
+    width: 255px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 7.5px;
+    margin: 0 auto 30px;
+}
+
+
+
+
     </style> 
 
 
@@ -239,7 +253,6 @@
         // Define contact details
 
 
-        {% if data.photo.url %}
 
         const contact = {
             name: "{{ data.name }}",
@@ -254,23 +267,7 @@
 
         };
 
-        {% else %}
-
-        const contact = {
-            name: "{{ data.name }}",
-            email: "{{ data.mail }}",
-            phone: "{{ data.mobile_no }}",
-            instagram: "{{ data.instagram }}",
-            twitter: "{{ data.twitter }}",
-            facebook: "{{ data.facebook }}",
-            linkdin: "{{ data.linkdin }}",
-            website: "{{ data.website1 }}",
-            photoUrl: ""
-
-
-        };
-
-        {% endif %}
+        
     
         // Create a vCard file
         const vcard = `BEGIN:VCARD
@@ -284,7 +281,6 @@
     URL;TYPE=FACEBOOK:${contact.facebook}
     URL;TYPE=LINKEDIN:${contact.linkedin}
     URL:TYPE=WEBSITE${contact.website}
-    PHOTO;VALUE=URL:${contact.photoUrl}
     END:VCARD`;
     
         // Create a Blob object from the vCard file
