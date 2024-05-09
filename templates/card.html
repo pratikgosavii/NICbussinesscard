@@ -39,7 +39,18 @@
       border-radius: 12px;
   }
 
+  .home-3 .bostami-header-area {
+    margin-bottom: 0px;
+}
 
+.btn-2{
+    background: linear-gradient(97deg, #272c33, #0d6efd);
+}
+
+
+.home-3 .bostami-parsonal-info-contact-item .icon:hover, .home-3 .bostami-parsonal-info-social-link li a:hover {
+    background: linear-gradient(97deg, #272c33, #0d6efd);
+}
     </style> 
 
 
@@ -53,7 +64,7 @@
             <div class="container">
                 <div class="bostami-header-wrap">
                     <div class="row">
-                        <div class="col-6">
+                        {% comment %} <div class="col-6">
                             <div class="bostami-header-logo">
                               <a class="site-logo" href="/">
                                 <img alt="logo" loading="lazy" width="153" height="32" decoding="async" data-nimg="1" style="color:transparent"
@@ -63,7 +74,7 @@
                             </a>
                             
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                         {% comment %} <div class="col-6">
                             <div class="bostami-header-menu-btn text-right mb-0">
                                 <div class="dark-btn mode-btn"><i class="moonicon fa-solid fa-moon"></i></div>
@@ -96,36 +107,37 @@
                         <div class="bostami-parsonal-info-wrap">
                           <div class="bostami-parsonal-info-img">
                             <img alt="author" loading="lazy" width="240" height="240" decoding="async" data-nimg="1" style="color:transparent"
-                            srcset="{% static '_next/parson-img-3cbc5.png' %}?w=256&q=75 1x,
-                                    {% static '_next/parson-img-3cbc5.png' %}?w=640&q=75 2x"
-                            src="{% static '_next/parson-img-3cbc5.png' %}?w=640&q=75">
+                            srcset="{{ data.photo.url }}?w=256&q=75 1x,
+                                    {{ data.photo.url }}?w=640&q=75 2x"
+                            src="{{ data.photo.url }}?w=640&q=75">
                        
                         </div>
                         
-                            <h4 class="bostami-parsonal-info-name"><a href="#">Monalisa Ashley</a></h4><span class="bostami-parsonal-info-bio mb-15">Ui/Ux Designer</span>
+                            <h4 class="bostami-parsonal-info-name"><a href="#">{{ data.name }}</a></h4><span class="bostami-parsonal-info-bio mb-15">{{ data.desigination }}</span>
                             <ul class="bostami-parsonal-info-social-link mb-30">
-                                <li><a style="color:#1773EA" href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a style="color:#1C9CEA" href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                                <li><a style="color:#e12a72" href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                <li><a style="color:#144679" href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                <li><a style="color:#1773EA" href="{{ data.facebook }}"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a style="color:#1C9CEA" href="{{ data.twitter }}"><i class="fa-brands fa-twitter"></i></a></li>
+                                <li><a style="color:#e12a72" href="{{ data.instagram }}"><i class="fa-brands fa-instagram"></i></a></li>
+                                <li><a style="color:#144679" href="{{ data.linkdin }}"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                <li><a style="color: grey;" href="{{ data.website1 }}"><i class="fa fa-globe" aria-hidden="true"></i></a></li>
                             </ul>
                             <div class="bostami-parsonal-info-contact mb-30">
                                 <div class="bostami-parsonal-info-contact-item">
                                     <div style="color:#E93B81;font-size:22px" class="icon"><i class="fa-regular fa-mobile"></i></div>
                                     <div class="text"><span>Phone</span>
-                                        <p>+123 456 7890</p>
+                                        <p>{{ data.mobile_no }}</p>
                                     </div>
                                 </div>
                                 <div class="bostami-parsonal-info-contact-item">
                                     <div style="color:#6AB5B9;font-size:22px" class="icon"><i class="fa-regular fa-envelope-open-text"></i></div>
                                     <div class="text"><span>Email</span>
-                                        <p>example@mail.com</p>
+                                        <p>{{ data.mail }}</p>
                                     </div>
                                 </div>
                                 <div class="bostami-parsonal-info-contact-item">
                                     <div style="color:#FD7590;font-size:22px" class="icon"><i class="fa-solid fa-location-dot"></i></div>
                                     <div class="text"><span>Location</span>
-                                        <p>Hong kong china</p>
+                                        <p>{{ data.address }}</p>
                                     </div>
                                 </div>
                                 <div class="bostami-parsonal-info-contact-item">
@@ -136,7 +148,6 @@
                                 </div>
                             </div>
                             <div class="bostami-parsonal-info-btn"><a class="btn-2" onclick="saveContact()"><span style="color:#fff" class="icon"><i class="fa-regular fa-download"></i></span>Save Details</a></div>
-                            <div class="bostami-parsonal-info-btn"><a class="btn-2" onclick="saveContact2()"><span style="color:#fff" class="icon"><i class="fa-regular fa-download"></i></span>Save Details</a></div>
                         </div>
                     </div>
                 </div>

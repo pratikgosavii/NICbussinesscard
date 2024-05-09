@@ -35,9 +35,10 @@ class client_Form(forms.ModelForm):
             'whatsapp': forms.URLInput(attrs={'class': 'form-control'}),
             'instagram': forms.URLInput(attrs={'class': 'form-control'}),
             'twitter': forms.URLInput(attrs={'class': 'form-control'}),
-            'linkedin': forms.URLInput(attrs={'class': 'form-control'}),
+            'linkdin': forms.URLInput(attrs={'class': 'form-control'}),
             'facebook': forms.URLInput(attrs={'class': 'form-control'}),
             'website1': forms.URLInput(attrs={'class': 'form-control'}),
+            'address_link': forms.URLInput(attrs={'class': 'form-control'}),
             
            
      

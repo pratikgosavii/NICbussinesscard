@@ -18,4 +18,4 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('home')  # Redirect to a specific URL after logout (change 'home' to your desired URL)
+    return redirect('login')  # Redirect to a specific URL after logout (change 'home' to your desired URL)

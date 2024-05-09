@@ -23,5 +23,6 @@ class client(models.Model):
     linkdin = models.URLField(max_length=300, null=True, blank=True)
     facebook = models.URLField(max_length=300, null=True, blank=True)
     website1 = models.URLField(max_length=300, null=True, blank=True)
+    address_link = models.URLField(max_length=300, null=True, blank=True)
 
     

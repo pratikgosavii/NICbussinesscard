@@ -28,7 +28,7 @@ def add_client(request):
 
     if request.method == 'POST':
 
-        forms = client_Form(request.POST)
+        forms = client_Form(request.POST, request.FILES)
 
         if forms.is_valid():
             forms.save()
@@ -54,7 +54,7 @@ def update_client(request, client_id):
 
         instance = client.objects.get(id=client_id)
 
-        forms = client_Form(request.POST, instance=instance)
+        forms = client_Form(request.POST, request.FILES, instance=instance)
 
         if forms.is_valid():
             forms.save()

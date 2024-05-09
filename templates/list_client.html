@@ -2,6 +2,24 @@
 
 {% block title %}Product List{% endblock title %}
 
+
+{% block head %}
+
+<style>
+
+    .copy_b {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    
+</style>
+
+{% endblock head %}
+
 {% block breadcrumbs %}
 <div class="breadcrumbs">
     <div class="breadcrumbs-inner">
@@ -45,6 +63,15 @@
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Mobile No</th>
+                                <th>Mail</th>
+                                <th>Desigination</th>
+                                <th>Instagram</th>
+                                <th>Twitter</th>
+                                <th>Linkdin</th>
+                                <th>Facebook</th>
+                                <th>Website</th>
+                                <th>Address Link</th>
+                                <th>Create Date</th>
                                 <th>Actions</th>
                                 
                             </tr>
@@ -57,7 +84,25 @@
                                 <td>{{ i.name }}</td>
                                 <td>{{ i.address }}</td>
                                 <td>{{ i.mobile_no }}</td>
+                                <td>{{ i.mail }}</td>
+                                <td>{{ i.desigination }}</td>
+                                <td>{{ i.instagram }}</td>
+                                <td>{{ i.twitter }}</td>
+                                <td>{{ i.linkdin }}</td>
+                                <td>{{ i.facebook }}</td>
+                                <td>{{ i.website1 }}</td>
+                                <td>{{ i.address_link }}</td>
+                                <td>{{ i.date }}</td>
+                                
                                 <td>  
+
+                                    <button id="payment-button" onclick="copyToClipboard('https://bussinessnicecard.pythonanywhere.com/showcard/{{ i.id }}')" type="button" class="copy_b">
+                                        <span id="payment-button-amount">Copy</span>
+                                    </button>
+                                    
+                                    
+
+
                                    <a href="{% url 'update_client' i.id %}"> <button id="payment-button"  style="background-color: #05386b; border: green; padding: 10px;border-radius: 12px;" type="submit" class="btn-info ">
                                         <span id="payment-button-amount">View</span>
                                     </button>  </a>
@@ -85,3 +130,37 @@
     
 </div>
 {% endblock content %}
+
+
+
+
+{% block js %}
+
+<script>
+
+
+
+    function copyToClipboard(text) {
+        // Create a temporary input element
+        var input = document.createElement('input');
+        input.setAttribute('value', text);
+        document.body.appendChild(input);
+    
+        // Select the text
+        input.select();
+    
+        // Copy to clipboard
+        document.execCommand('copy');
+    
+        // Remove the temporary input element
+        document.body.removeChild(input);
+    
+        // Notify the user
+        alert('URL copied to clipboard!');
+    }
+
+
+</script>
+
+
+{% endblock js %}
