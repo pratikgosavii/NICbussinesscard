@@ -106,40 +106,89 @@
                     <div class="bostami-parsonal-info-area">
                         <div class="bostami-parsonal-info-wrap">
                           <div class="bostami-parsonal-info-img">
-                            <img alt="author" loading="lazy" width="240" height="240" decoding="async" data-nimg="1" style="color:transparent"
-                            srcset="{{ data.photo.url }}?w=256&q=75 1x,
-                                    {{ data.photo.url }}?w=640&q=75 2x"
-                            src="{{ data.photo.url }}?w=640&q=75">
+
+                            {% if data.photo.url %}
+
+                                <img alt="author" loading="lazy" width="240" height="240" decoding="async" data-nimg="1" style="color:transparent"
+                                srcset="{{ data.photo.url }}?w=256&q=75 1x,
+                                        {{ data.photo.url }}?w=640&q=75 2x"
+                                src="{{ data.photo.url }}?w=640&q=75">
+
+                            {% else %}
+
+                                <img alt="author" loading="lazy" width="240" height="240" decoding="async" data-nimg="1" style="color:transparent"
+                                srcset="{% static '_next/images.png' %}?w=256&q=75 1x,
+                                        {% static '_next/images.png' %}?w=640&q=75 2x"
+                                src="{% static '_next/images.png' %}?w=640&q=75">
+
+                            {% endif %}
+
                        
                         </div>
                         
-                            <h4 class="bostami-parsonal-info-name"><a href="#">{{ data.name }}</a></h4><span class="bostami-parsonal-info-bio mb-15">{{ data.desigination }}</span>
+                            <h4 class="bostami-parsonal-info-name"><a href="#">{{ data.name }}</a>
+
+                                {% if data.company_name %}
+                                    </h4><span class="bostami-parsonal-info-bio mb-15">{{ data.company_name }}</span> </br>
+                                {% endif %}
+
+                                {% if data.desigination %}
+                                    </h4><span class="bostami-parsonal-info-bio mb-15">{{ data.desigination }}</span>
+                                {% endif %}
+
+
                             <ul class="bostami-parsonal-info-social-link mb-30">
+
+                                {% if data.facebook %}
                                 <li><a style="color:#1773EA" href="{{ data.facebook }}"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                {% endif %}
+                                {% if data.twitter %}
                                 <li><a style="color:#1C9CEA" href="{{ data.twitter }}"><i class="fa-brands fa-twitter"></i></a></li>
+                                {% endif %}
+                                {% if data.instagram %}
                                 <li><a style="color:#e12a72" href="{{ data.instagram }}"><i class="fa-brands fa-instagram"></i></a></li>
+                                {% endif %}
+                                {% if data.linkdin %}
                                 <li><a style="color:#144679" href="{{ data.linkdin }}"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                {% endif %}
+                                {% if data.website1 %}
                                 <li><a style="color: grey;" href="{{ data.website1 }}"><i class="fa fa-globe" aria-hidden="true"></i></a></li>
+                                {% endif %}
                             </ul>
                             <div class="bostami-parsonal-info-contact mb-30">
+
+                                {% if data.mobile_no %}
+
                                 <div class="bostami-parsonal-info-contact-item">
                                     <div style="color:#E93B81;font-size:22px" class="icon"><i class="fa-regular fa-mobile"></i></div>
                                     <div class="text"><span>Phone</span>
                                         <p>{{ data.mobile_no }}</p>
                                     </div>
                                 </div>
+
+                                {% endif %}
+
+                                {% if data.mail %}
+
                                 <div class="bostami-parsonal-info-contact-item">
                                     <div style="color:#6AB5B9;font-size:22px" class="icon"><i class="fa-regular fa-envelope-open-text"></i></div>
                                     <div class="text"><span>Email</span>
                                         <p>{{ data.mail }}</p>
                                     </div>
                                 </div>
+
+                                {% endif %}
+
+                                {% if data.address %}
+
                                 <div class="bostami-parsonal-info-contact-item">
                                     <div style="color:#FD7590;font-size:22px" class="icon"><i class="fa-solid fa-location-dot"></i></div>
                                     <div class="text"><span>Location</span>
                                         <p>{{ data.address }}</p>
                                     </div>
                                 </div>
+
+                                {% endif %}
                                 
                             </div>
                             <div class="bostami-parsonal-info-btn"><a class="btn-2" onclick="saveContact()"><span style="color:#fff" class="icon"><i class="fa-regular fa-download"></i></span>Save Details</a></div>
