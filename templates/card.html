@@ -262,14 +262,49 @@
           "twitter": "username"
       };
 
+      {% if data.photo.url %}
+
+      const contact = {
+        "name": "{{ data.name }}",
+        "email": "{{ data.mail }}",
+        "phone": "{{ data.mobile_no }}",
+        "instagram": "{{ data.instagram }}",
+        "twitter": "{{ data.twitter }}",
+        "facebook": "{{ data.facebook }}",
+        "linkdin": "{{ data.linkdin }}",
+        "website": "{{ data.website1 }}",
+        "photoUrl": "{{ data.photo.url }}",
+
+    };
+
+    {% else %}
+
+    const contact = {
+        "name": "{{ data.name }}",
+        "email": "{{ data.mail }}",
+        "phone": "{{ data.mobile_no }}",
+        "instagram": "{{ data.instagram }}",
+        "twitter": "{{ data.twitter }}",
+        "facebook": "{{ data.facebook }}",
+        "linkdin": "{{ data.linkdin }}",
+        "website": "{{ data.website1 }}",
+
+    };
+
+    {% endif %}
+
+
       // Generate vCard content
       var vCard = `BEGIN:VCARD
 VERSION:3.0
-FN:${contact.firstName} ${contact.lastName}
+FN:${contact.name}
 TEL:${contact.phone}
 EMAIL:${contact.email}
-URL;TYPE=INSTAGRAM:http://www.instagram.com/${contact.instagram}
-URL;TYPE=TWITTER:http://www.twitter.com/${contact.twitter}
+URL;TYPE=INSTAGRAM:${contact.instagram}
+URL;TYPE=TWITTER:${contact.twitter}
+URL;TYPE=LINKEDIN:${contact.linkdin}
+URL;TYPE=FACEBOOK:${contact.facebook}
+URL;TYPE=WEBSITE:${contact.website}
 END:VCARD`;
 
       // Encode vCard data
