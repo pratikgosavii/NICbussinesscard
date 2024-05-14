@@ -287,6 +287,9 @@
       const contact = {
         "name": "{{ data.name }}",
 
+        {% if data.company_name %}
+        "company_name": "{{ data.mail }}",
+        {% endif %}
       {% if data.mail %}
       "email": "{{ data.mail }}",
       {% endif %}
@@ -319,6 +322,9 @@
 
         "name": "{{ data.name }}",
 
+        {% if data.company_name %}
+        "company_name": "{{ data.mail }}",
+        {% endif %}
         {% if data.mail %}
         "email": "{{ data.mail }}",
         {% endif %}
@@ -356,6 +362,11 @@
       
       // Include phone if it exists
           vCard += `TEL:${contact.phone}\n`;
+      
+      // Include email if it exists
+      if (contact.company_name) {
+          vCard += `ORG:${contact.company_name}\n`;
+      }
       
       // Include email if it exists
       if (contact.email) {
