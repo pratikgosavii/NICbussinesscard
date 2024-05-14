@@ -363,7 +363,12 @@
       var vCard = `BEGIN:VCARD}\n`;
       vCard += `VERSION:3.0}\n`;
       
+
+
       
+            vCard += `FN:${contact.name}\n`;
+
+            
 
              if (contact.company_name) {
                 vCard += `ORG:${contact.company_name || ''}\n`;
@@ -372,7 +377,6 @@
                 vCard += `TITLE:${contact.designation}\n`;
             }
 
-            vCard += `FN:${contact.name}\n`;
 
       
       // Include phone if it exists
