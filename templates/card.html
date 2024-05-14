@@ -360,7 +360,9 @@
       
       vCard += `FN:${contact.name}\n`;
        // Include email if it exists
-    
+      if (contact.company_name) {
+          vCard += `ORG:${contact.company_name}\n`;
+      }
       
       // Include phone if it exists
           vCard += `TEL:${contact.phone}\n`;
