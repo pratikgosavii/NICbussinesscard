@@ -367,11 +367,12 @@
 
       
             vCard += `FN:${contact.name}\n`;
+            vCard += `N:${contact.name}\n`;
 
-            
+
 
              if (contact.company_name) {
-                vCard += `ORG:${contact.company_name || ''}\n`;
+                vCard += `ORG:${contact.company_name}\n`;
             }
              if (contact.designation) {
                 vCard += `TITLE:${contact.designation}\n`;
