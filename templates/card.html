@@ -288,7 +288,7 @@
         "name": "{{ data.name }}",
 
         {% if data.company_name %}
-        "company_name": "{{ data.mail }}",
+        "company_name": "{{ data.company_name }}",
         {% endif %}
       {% if data.mail %}
       "email": "{{ data.mail }}",
@@ -323,7 +323,7 @@
         "name": "{{ data.name }}",
 
         {% if data.company_name %}
-        "company_name": "{{ data.mail }}",
+        "company_name": "{{ data.company_name }}",
         {% endif %}
         {% if data.mail %}
         "email": "{{ data.mail }}",
@@ -360,9 +360,7 @@
       
       vCard += `FN:${contact.name}\n`;
        // Include email if it exists
-      if (contact.company_name) {
-          vCard += `ORG:${contact.company_name}\n`;
-      }
+    
       
       // Include phone if it exists
           vCard += `TEL:${contact.phone}\n`;
