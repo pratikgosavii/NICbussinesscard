@@ -360,7 +360,6 @@
       
        if (contact.name) {
                 vCard += `FN:${contact.name}\n`;
-                vCard += `ORG:${contact.company_name || ''}\n`;
             } else {
                 // If name is not provided, only include company name
                 vCard += `ORG:${contact.company_name || ''}\n`;
