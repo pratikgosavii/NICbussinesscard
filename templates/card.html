@@ -363,9 +363,12 @@
       var vCard = `BEGIN:VCARD}\n`;
       vCard += `VERSION:3.0}\n`;
       
+        const nameParts = contact.name.split(' ');
 
       
-            vCard += `N:${contact.name}\n`;
+            vCard += `FN:${contact.name}\n`;
+            vCard += `N:${nameParts[0] }; ${nameParts[1] }\n`;
+            vCard += `N:${nameParts[1] }\n`;
 
 
 
