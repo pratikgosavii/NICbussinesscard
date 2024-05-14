@@ -333,34 +333,34 @@
       }
       
       // Include email if it exists
-      if (contact.email) {
+      if (contact.mail) {
           vCard += `EMAIL:${contact.email}\n`;
       }
       
       // Include Instagram URL if it exists
-      if (contact.instagram) {
-          vCard += `URL;TYPE=INSTAGRAM:${contact.instagram}\n`;
-      }
-      
-      // Include Twitter URL if it exists
-      if (contact.twitter) {
-          vCard += `URL;TYPE=TWITTER:${contact.twitter}\n`;
-      }
-      
-      // Include LinkedIn URL if it exists
-      if (contact.linkdin) {
-          vCard += `URL;TYPE=LINKEDIN:${contact.linkdin}\n`;
-      }
-      
-      // Include Facebook URL if it exists
-      if (contact.facebook) {
-          vCard += `URL;TYPE=FACEBOOK:${contact.facebook}\n`;
-      }
-      
-      // Include Website URL if it exists
-      if (contact.website) {
-          vCard += `URL;TYPE=WEBSITE:${contact.website}\n`;
-      }
+    if (contact.instagram) {
+        vCard += `URL;TYPE=INSTAGRAM;LABEL=Instagram:${contact.instagram}\n`;
+    }
+
+    // Include Twitter URL if it exists
+    if (contact.twitter) {
+        vCard += `URL;TYPE=TWITTER;LABEL=Twitter:${contact.twitter}\n`;
+    }
+
+    // Include LinkedIn URL if it exists
+    if (contact.linkdin) {
+        vCard += `URL;TYPE=LINKEDIN;LABEL=LinkedIn:${contact.linkdin}\n`;
+    }
+
+    // Include Facebook URL if it exists
+    if (contact.facebook) {
+        vCard += `URL;TYPE=FACEBOOK;LABEL=Facebook:${contact.facebook}\n`;
+    }
+
+    // Include Website URL if it exists
+    if (contact.website) {
+        vCard += `URL;TYPE=WEBSITE;LABEL=Website:${contact.website}\n`;
+    }
       
       // Include photo URL if it exists
       if (contact.photoUrl) {
