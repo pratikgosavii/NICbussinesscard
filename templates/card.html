@@ -325,17 +325,17 @@
 
     {% endif %}
 
-    console.log(contact)
 
 
       // Generate vCard content
-      var vCard = `BEGIN:VCARD
-      VERSION:3.0
-      FN:${contact.name}
-      \n`;
+      var vCard = `BEGIN:VCARD}\n`;
+      vCard += `VERSION:3.0}\n`;
+      
+      
+      vCard += `FN:${contact.name}\n`;
       
       // Include phone if it exists
-          vCard += `TEL:+918830265487\n`;
+          vCard += `TEL:${contact.phone}\n`;
       
       // Include email if it exists
       if (contact.email) {
