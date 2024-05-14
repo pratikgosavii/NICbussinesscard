@@ -260,10 +260,10 @@
       const contact = {
         "name": "{{ data.name }}",
 
-      {% if data.email %}
+      {% if data.mail %}
       "email": "{{ data.mail }}",
       {% endif %}
-      {% if data.phone %}
+      {% if data.mobile_no %}
       "phone": "{{ data.mobile_no }}",
       {% endif %}
       {% if data.instagram %}
@@ -289,10 +289,13 @@
     {% else %}
 
     const contact = {
-        {% if data.email %}
+
+        "name": "{{ data.name }}",
+
+        {% if data.mail %}
         "email": "{{ data.mail }}",
         {% endif %}
-        {% if data.phone %}
+        {% if data.mobile_no %}
         "phone": "{{ data.mobile_no }}",
         {% endif %}
         {% if data.instagram %}
@@ -314,6 +317,8 @@
     };
 
     {% endif %}
+
+    console.log(contact)
 
 
       // Generate vCard content
