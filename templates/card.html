@@ -340,7 +340,7 @@
       }
       
       // Include email if it exists
-      if (contact.mail) {
+      if (contact.email) {
           vCard += `EMAIL:${contact.email}\n`;
       }
       
@@ -375,6 +375,9 @@
       }
       
       vCard += `END:VCARD`;
+
+    console.log(vCard)
+
       // Encode vCard data
       var vCardData = encodeURIComponent(vCard);
 
