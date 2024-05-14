@@ -290,6 +290,9 @@
         {% if data.company_name %}
         "company_name": "{{ data.company_name }}",
         {% endif %}
+         {% if data.desigination %}
+        "designation": "{{ data.desigination }}",
+        {% endif %}
       {% if data.mail %}
       "email": "{{ data.mail }}",
       {% endif %}
@@ -325,6 +328,9 @@
         {% if data.company_name %}
         "company_name": "{{ data.company_name }}",
         {% endif %}
+        {% if data.desigination %}
+        "designation": "{{ data.desigination }}",
+        {% endif %}
         {% if data.mail %}
         "email": "{{ data.mail }}",
         {% endif %}
@@ -359,10 +365,15 @@
       
       
        if (contact.name) {
+                vCard += `ORG:${contact.company_name || ''}\n`;
                 vCard += `FN:${contact.name}\n`;
             } else {
                 // If name is not provided, only include company name
                 vCard += `ORG:${contact.company_name || ''}\n`;
+            }
+
+             if (contact.designation) {
+                vCard += `TITLE:${contact.designation}\n`;
             }
       
       // Include phone if it exists
