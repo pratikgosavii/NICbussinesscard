@@ -262,8 +262,7 @@ function saveContact() {
         "firstName": "John",
         "lastName": "Doe",
         "phone": "+1234567890",
-        "email": "john@example.com",
-        "photoUrl": "https://example.com/photo.jpg" // Add a photo URL
+        "email": "john@example.com"
     };
 
     // Generate vCard content
@@ -273,30 +272,31 @@ function saveContact() {
         `FN:${contact.firstName} ${contact.lastName}`,
         `N:${contact.lastName};${contact.firstName};;;`,
         `TEL:${contact.phone}`,
-        `EMAIL:${contact.email}`
+        `EMAIL:${contact.email}`,
+        "END:VCARD"
     ];
-
-    if (contact.photoUrl) {
-        vCard.push(`PHOTO;VALUE=URL:${contact.photoUrl}`);
-    }
-
-    vCard.push("END:VCARD");
 
     // Join vCard array into a single string with newline characters
     var vCardString = vCard.join("\n");
 
+    // Debug: Output the vCard content to console for verification
+    console.log(vCardString);
+
     // Create a Blob with the vCard data
     var blob = new Blob([vCardString], { type: 'text/vcard' });
-    
+
     // Create a download link
     var downloadLink = document.createElement('a');
     downloadLink.href = URL.createObjectURL(blob);
     downloadLink.download = 'contact.vcf';
-    
+
     // Append the link to the document body and trigger the download
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink); // Clean up after the download
+
+
+    
   }
 
 
