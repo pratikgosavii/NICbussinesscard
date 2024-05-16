@@ -270,30 +270,33 @@ function saveContact() {
     var vCard = [
         "BEGIN:VCARD",
         "VERSION:3.0",
-        `FN:${contact.firstName}`,
-        `N:${contact.lastName}`,
+        `FN:${contact.firstName} ${contact.lastName}`,
+        `N:${contact.lastName};${contact.firstName};;;`,
         `TEL:${contact.phone}`,
-        `EMAIL:${contact.email}`,
+        `EMAIL:${contact.email}`
     ];
 
-   
+    if (contact.photoUrl) {
+        vCard.push(`PHOTO;VALUE=URL:${contact.photoUrl}`);
+    }
 
     vCard.push("END:VCARD");
 
     // Join vCard array into a single string with newline characters
     var vCardString = vCard.join("\n");
-    var vCardString = vCardString + "\n"
-    // Encode vCard data
-    console.log(vCardString)
-    var vCardData = encodeURIComponent(vCardString);
-    // Create download link
-    var downloadLink = document.createElement('a');
-    downloadLink.setAttribute('href', 'data:text/vcard;charset=utf-8,' + vCardData);
-    downloadLink.setAttribute('download', 'contact.vcf');
-    document.body.appendChild(downloadLink); // Append to body to make it clickable
-    downloadLink.click();
-    document.body.removeChild(downloadLink); // Clean up after click
 
+    // Create a Blob with the vCard data
+    var blob = new Blob([vCardString], { type: 'text/vcard' });
+    
+    // Create a download link
+    var downloadLink = document.createElement('a');
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.download = 'contact.vcf';
+    
+    // Append the link to the document body and trigger the download
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink); // Clean up after the download
     
   }
 
