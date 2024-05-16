@@ -70,17 +70,18 @@ def add_client(request):
         return render(request, 'add_client.html', context)
 
         
+import copy
 
 @login_required(login_url='login')
 def update_client(request, random_key_value):
 
     instance = client.objects.get(random_key=random_key_value)
-
+    instance_copy = copy.copy(instance)
     if request.method == 'POST':
         form = client_Form(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             updated_client = form.save(commit=False)
-            updated_client.random_key = instance.random_key  # Preserve the existing key
+            updated_client.random_key = instance_copy.random_key  # Preserve the existing key
             updated_client.save()
             return redirect('list_client')
         else:
