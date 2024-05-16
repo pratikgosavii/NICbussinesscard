@@ -96,9 +96,9 @@ def update_client(request, random_key_value):
         
 
 @login_required(login_url='login')
-def delete_client(request, random_key_value):
+def delete_client(request, client_id):
 
-    client.objects.get(id=random_key_value).delete()
+    client.objects.get(id=client_id).delete()
 
     return HttpResponseRedirect(reverse('list_client'))
 
