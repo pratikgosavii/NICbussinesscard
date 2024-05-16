@@ -270,15 +270,13 @@ function saveContact() {
     var vCard = [
         "BEGIN:VCARD",
         "VERSION:3.0",
-        `FN:${contact.firstName} ${contact.lastName}`,
+        `FN:${contact.firstName}`,
         `N:${contact.lastName}`,
         `TEL:${contact.phone}`,
         `EMAIL:${contact.email}`,
     ];
 
-    if (contact.photoUrl) {
-        vCard.push(`PHOTO;VALUE=URL:${contact.photoUrl}`);
-    }
+   
 
     vCard.push("END:VCARD");
 
@@ -286,8 +284,8 @@ function saveContact() {
     var vCardString = vCard.join("\n");
     var vCardString = vCardString + "\n"
     // Encode vCard data
+    console.log(vCardString)
     var vCardData = encodeURIComponent(vCardString);
-
     // Create download link
     var downloadLink = document.createElement('a');
     downloadLink.setAttribute('href', 'data:text/vcard;charset=utf-8,' + vCardData);
