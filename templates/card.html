@@ -267,19 +267,26 @@ function saveContact() {
     };
 
     // Generate vCard content
-    var vCard = `BEGIN:VCARD\n`;
-    vCard += `VERSION:3.0\n`;
-    vCard += `FN:${contact.firstName} ${contact.lastName}\n`;
-    vCard += `N:${contact.lastName};${contact.firstName};;;\n`;
-    vCard += `TEL:${contact.phone}\n`;
-    vCard += `EMAIL:${contact.email}\n`;
-    if (contact.photoUrl) {
-        vCard += `PHOTO;VALUE=URL:${contact.photoUrl}\n`;
-    }
-    vCard += `END:VCARD\n`;
+    var vCard = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        `FN:${contact.firstName} ${contact.lastName}`,
+        `N:${contact.lastName}`,
+        `TEL:${contact.phone}`,
+        `EMAIL:${contact.email}`,
+    ];
 
+    if (contact.photoUrl) {
+        vCard.push(`PHOTO;VALUE=URL:${contact.photoUrl}`);
+    }
+
+    vCard.push("END:VCARD");
+
+    // Join vCard array into a single string with newline characters
+    var vCardString = vCard.join("\n");
+    var vCardString = vCardString + "\n"
     // Encode vCard data
-    var vCardData = encodeURIComponent(vCard);
+    var vCardData = encodeURIComponent(vCardString);
 
     // Create download link
     var downloadLink = document.createElement('a');
@@ -288,6 +295,8 @@ function saveContact() {
     document.body.appendChild(downloadLink); // Append to body to make it clickable
     downloadLink.click();
     document.body.removeChild(downloadLink); // Clean up after click
+
+    
   }
 
 
