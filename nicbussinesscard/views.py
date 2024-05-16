@@ -80,7 +80,7 @@ def update_client(request, random_key_value):
         form = client_Form(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             updated_client = form.save(commit=False)
-            updated_client.random_key = instance.key  # Preserve the existing key
+            updated_client.random_key = instance.random_key  # Preserve the existing key
             updated_client.save()
             return redirect('list_client')
         else:
