@@ -53,7 +53,7 @@ def add_client(request):
             unique_key = generate_key_from_id(new_record.id)
 
             # Update the record with the generated key
-            new_record.key = unique_key
+            new_record.random_key = unique_key
             new_record.save()
 
             return redirect('list_client')
@@ -72,36 +72,33 @@ def add_client(request):
         
 
 @login_required(login_url='login')
-def update_client(request, client_id):
+def update_client(request, random_key_value):
+
+    instance = client.objects.get(random_key=random_key_value)
 
     if request.method == 'POST':
-
-        instance = client.objects.get(id=client_id)
-
-        forms = client_Form(request.POST, request.FILES, instance=instance)
-
-        if forms.is_valid():
-            forms.save()
+        form = client_Form(request.POST, request.FILES, instance=instance)
+        if form.is_valid():
+            updated_client = form.save(commit=False)
+            updated_client.random_key = instance.key  # Preserve the existing key
+            updated_client.save()
             return redirect('list_client')
         else:
-            print(forms.errors)
-    
+            print(form.errors)
     else:
+        form = client_Form(instance=instance)
 
-        instance = client.objects.get(id=client_id)
-        forms = client_Form(instance=instance)
-
-        context = {
-            'form': forms
-        }
-        return render(request, 'add_client.html', context)
+    context = {
+        'form': form
+    }
+    return render(request, 'add_client.html', context)
 
         
 
 @login_required(login_url='login')
-def delete_client(request, client_id):
+def delete_client(request, random_key_value):
 
-    client.objects.get(id=client_id).delete()
+    client.objects.get(id=random_key_value).delete()
 
     return HttpResponseRedirect(reverse('list_client'))
 
@@ -116,9 +113,9 @@ def list_client(request):
     return render(request, 'list_client.html', context)
 
 
-def show_card(request, random_key):
+def show_card(request, random_key_value):
 
-    data = client.objects.get(random_key=random_key)
+    data = client.objects.get(random_key=random_key_value)
 
     context = {
         'data': data

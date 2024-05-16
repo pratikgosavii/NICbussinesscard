@@ -92,18 +92,18 @@
                                 <td style="display: flex;
                                 gap: 12px;">  
 
-                                    <button id="payment-button" class="btn-info " style="background-color: #343a40;" onclick="copyToClipboard('https://www.nfcmetalcard.com/showcard/{{ i.id }}')" type="button">
+                                    <button id="payment-button" class="btn-info " style="background-color: #343a40;" onclick="copyToClipboard('https://www.nfcmetalcard.com/showcard/{{ i.random_key }}')" type="button">
                                         <span id="payment-button-amount">Copy</span>
                                     </button>
                                     
                                     
 
 
-                                   <a href="{% url 'update_client' i.id %}"> <button id="payment-button"  style="background-color: #05386b; border: green; padding: 10px;border-radius: 12px;" type="submit" class="btn-info ">
+                                   <a href="{% url 'update_client' i.random_key %}"> <button id="payment-button"  style="background-color: #05386b; border: green; padding: 10px;border-radius: 12px;" type="submit" class="btn-info ">
                                         <span id="payment-button-amount">View</span>
                                     </button>  </a>
                                    
-                                    <a href="{% url 'delete_client' i.id %}"> <button id="payment-button"  style="background-color: red; border: green; padding: 10px;border-radius: 12px;" type="submit" class="btn-info ">
+                                    <a href="{% url 'delete_client' i.random_key %}"> <button id="payment-button"  style="background-color: red; border: green; padding: 10px;border-radius: 12px;" type="submit" class="btn-info ">
                                         <span id="payment-button-amount">Delete</span>
                                     </button>  </a>
                                    

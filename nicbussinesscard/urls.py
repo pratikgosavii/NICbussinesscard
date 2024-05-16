@@ -27,10 +27,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('user.urls')),
     path('add-client', add_client, name='add_client'),
-    path('update-client/<client_id>', update_client, name='update_client'),
-    path('delete-client/<client_id>', delete_client, name='delete_client'),
+    path('update-client/<random_key_value>', update_client, name='update_client'),
+    path('delete-client/<random_key_value>', delete_client, name='delete_client'),
     path('list-client/', list_client, name='list_client'),
-    path('showcard/<random_key>', show_card, name='show_card'),
+    path('showcard/<random_key_value>', show_card, name='show_card'),
     path('', dashboard, name='dashboard'),
 
 ]
