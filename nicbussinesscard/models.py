@@ -25,5 +25,5 @@ class client(models.Model):
     facebook = models.URLField(max_length=300, null=True, blank=True)
     website1 = models.URLField(max_length=300, null=True, blank=True)
     address_link = models.URLField(max_length=300, null=True, blank=True)
-
+    random_key = models.CharField(max_length=64, unique=True)
     

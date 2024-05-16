@@ -23,6 +23,18 @@ from django.contrib import messages
 
 
 
+import hashlib
+import base64
+
+def generate_key_from_id(instance_id):
+    # Generate a unique key using a hash function
+    hash_object = hashlib.sha256(str(instance_id).encode())
+    # Encode the hash in base64 to get a 64-character string
+    unique_key = base64.urlsafe_b64encode(hash_object.digest()).decode()[:64]
+    return unique_key
+
+
+
 @login_required(login_url='login')
 def add_client(request):
 
@@ -31,7 +43,19 @@ def add_client(request):
         forms = client_Form(request.POST, request.FILES)
 
         if forms.is_valid():
-            forms.save()
+            
+            new_record = forms.save(commit=False)
+            
+            # Save the record to get the unique ID
+            new_record.save()
+
+            # Generate a unique key based on the new record's ID
+            unique_key = generate_key_from_id(new_record.id)
+
+            # Update the record with the generated key
+            new_record.key = unique_key
+            new_record.save()
+
             return redirect('list_client')
         else:
             print(forms.errors)
@@ -92,9 +116,9 @@ def list_client(request):
     return render(request, 'list_client.html', context)
 
 
-def show_card(request, user_id):
+def show_card(request, random_key):
 
-    data = client.objects.get(id=user_id)
+    data = client.objects.get(random_key=random_key)
 
     context = {
         'data': data

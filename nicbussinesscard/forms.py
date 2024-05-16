@@ -18,6 +18,9 @@ class client_Form(forms.ModelForm):
             'company_name': forms.TextInput(attrs={
                 'class': 'form-control', 'id': 'company_name'
             }),
+            'random_key': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'random_key'
+            }),
             'address': forms.TextInput(attrs={
                 'class': 'form-control', 'id': 'name'
             }),

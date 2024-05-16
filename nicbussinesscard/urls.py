@@ -30,7 +30,7 @@ urlpatterns = [
     path('update-client/<client_id>', update_client, name='update_client'),
     path('delete-client/<client_id>', delete_client, name='delete_client'),
     path('list-client/', list_client, name='list_client'),
-    path('showcard/<user_id>', show_card, name='show_card'),
+    path('showcard/<random_key>', show_card, name='show_card'),
     path('', dashboard, name='dashboard'),
 
 ]
