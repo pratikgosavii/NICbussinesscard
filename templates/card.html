@@ -312,6 +312,7 @@
         "website": "{{ data.website1 }}",
         {% endif %}
     
+          "photoUrl": "{{ data.photo.url }}",
     
       };
     
@@ -416,7 +417,13 @@
             vCard += `PHOTO;VALUE=URL:${contact.photoUrl}\n`;
         }
     
-       
+         if (contact.photoUrl) {
+                  const base64Image = await encodeImageToBase64(contact.photoUrl);
+                  if (base64Image) {
+                      vCard += `PHOTO;VALUE=URL:${contact.photoUrl}\n`;
+                      vCard += `PHOTO;ENCODING=b;TYPE=JPEG:${base64Image}\n`;
+                  }
+              }
         
         vCard += `END:VCARD`;
     
