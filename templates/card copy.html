@@ -648,33 +648,195 @@ body {
 
   
   <script>
-    function saveContact() {
-        // Define contact details
-        var contact = {
-            "firstName": "John",
-            "lastName": "Doe",
-            "phone": "+1234567890",
-            "email": "john@example.com"
-        };
+    
+        // Function to fetch image from URL and encode it as Base64
+        async function encodeImageToBase64(imageUrl) {
+          try {
+              const response = await fetch(imageUrl);
+              const blob = await response.blob();
 
-        // Generate vCard content
-        var vCard = `BEGIN:VCARD
-VERSION:3.0
-FN:${contact.firstName} ${contact.lastName}
-TEL:${contact.phone}
-EMAIL:${contact.email}
-PHOTO:VALUE=URL:${contact.photoUrl};
-END:VCARD`;
+              return new Promise((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                  reader.onerror = reject;
+                  reader.readAsDataURL(blob);
+              });
+          } catch (error) {
+              console.error("Error fetching image:", error);
+              return null;
+          }
+      }
 
-        // Encode vCard data
-        var vCardData = encodeURIComponent(vCard);
+      // Function to generate vCard content
+       
+  
+  async function saveContact() {
+    // Define contact details
+   
 
-        // Create download link
-        var downloadLink = document.createElement('a');
-        downloadLink.setAttribute('href', 'data:text/vcard;charset=utf-8,' + vCardData);
-        downloadLink.setAttribute('download', 'contact.vcf');
-        downloadLink.click();
+    {% if data.photo and data.photo.url %}
+
+    const contact = {
+      "name": "{{ data.name }}",
+
+      {% if data.company_name %}
+      "company_name": "{{ data.company_name }}",
+      {% endif %}
+       {% if data.desigination %}
+      "designation": "{{ data.desigination }}",
+      {% endif %}
+    {% if data.mail %}
+    "email": "{{ data.mail }}",
+    {% endif %}
+    {% if data.mobile_no %}
+    "phone": "{{ data.mobile_no }}",
+    {% endif %}
+    {% if data.instagram %}
+    "instagram": "{{ data.instagram }}",
+    {% endif %}
+    {% if data.twitter %}
+    "twitter": "{{ data.twitter }}",
+    {% endif %}
+    {% if data.facebook %}
+    "facebook": "{{ data.facebook }}",
+    {% endif %}
+    {% if data.linkdin %}
+    "linkdin": "{{ data.linkdin }}",
+    {% endif %}
+    {% if data.website1 %}
+    "website": "{{ data.website1 }}",
+    {% endif %}
+
+      "photoUrl": "{{ data.photo.url }}",
+
+  };
+
+  {% else %}
+
+  const contact = {
+
+      "name": "{{ data.name }}",
+
+      {% if data.company_name %}
+      "company_name": "{{ data.company_name }}",
+      {% endif %}
+      {% if data.desigination %}
+      "designation": "{{ data.desigination }}",
+      {% endif %}
+      {% if data.mail %}
+      "email": "{{ data.mail }}",
+      {% endif %}
+      {% if data.mobile_no %}
+      "phone": "{{ data.mobile_no }}",
+      {% endif %}
+      {% if data.instagram %}
+      "instagram": "{{ data.instagram }}",
+      {% endif %}
+      {% if data.twitter %}
+      "twitter": "{{ data.twitter }}",
+      {% endif %}
+      {% if data.facebook %}
+      "facebook": "{{ data.facebook }}",
+      {% endif %}
+      {% if data.linkdin %}
+      "linkdin": "{{ data.linkdin }}",
+      {% endif %}
+      {% if data.website1 %}
+      "website": "{{ data.website1 }}",
+      {% endif %}
+
+  };
+
+  {% endif %}
+
+
+
+    // Generate vCard content
+    var vCard = `BEGIN:VCARD\n`;
+    vCard += `VERSION:3.0\n`;
+    
+      const nameParts = contact.name.split(' ');
+
+    
+          vCard += `FN:${contact.name}\n`;
+          vCard += `N:${nameParts[1] }; ${nameParts[0] };;;\n`;
+
+
+
+           if (contact.company_name) {
+              vCard += `ORG:${contact.company_name}\n`;
+          }
+           if (contact.designation) {
+              vCard += `TITLE:${contact.designation}\n`;
+          }
+
+
+    
+    // Include phone if it exists
+        vCard += `TEL:${contact.phone}\n`;
+    
+   
+    
+    // Include email if it exists
+    if (contact.email) {
+        vCard += `EMAIL:${contact.email}\n`;
     }
+    
+    // Include Instagram URL if it exists
+  if (contact.instagram) {
+      vCard += `URL;TYPE=INSTAGRAM;LABEL=Instagram:${contact.instagram}\n`;
+  }
+
+  // Include Twitter URL if it exists
+  if (contact.twitter) {
+      vCard += `URL;TYPE=TWITTER;LABEL=Twitter:${contact.twitter}\n`;
+  }
+
+  // Include LinkedIn URL if it exists
+  if (contact.linkdin) {
+      vCard += `URL;TYPE=LINKEDIN;LABEL=LinkedIn:${contact.linkdin}\n`;
+  }
+
+  // Include Facebook URL if it exists
+  if (contact.facebook) {
+      vCard += `URL;TYPE=FACEBOOK;LABEL=Facebook:${contact.facebook}\n`;
+  }
+
+  // Include Website URL if it exists
+  if (contact.website) {
+      vCard += `URL;TYPE=WEBSITE;LABEL=Website:${contact.website}\n`;
+  }
+    
+    // Include photo URL if it exists
+    if (contact.photoUrl) {
+        vCard += `PHOTO;VALUE=URL:${contact.photoUrl}\n`;
+    }
+
+     if (contact.photoUrl) {
+              const base64Image = await encodeImageToBase64(contact.photoUrl);
+              if (base64Image) {
+                  vCard += `PHOTO;VALUE=URL:${contact.photoUrl}\n`;
+                  vCard += `PHOTO;ENCODING=b;TYPE=JPEG:${base64Image}\n`;
+              }
+          }
+    
+    vCard += `END:VCARD`;
+
+  console.log(vCard)
+
+    // Encode vCard data
+    var vCardData = encodeURIComponent(vCard);
+
+    // Create download link
+    var downloadLink = document.createElement('a');
+    downloadLink.setAttribute('href', 'data:text/vcard;charset=utf-8,' + vCardData);
+    downloadLink.setAttribute('download', 'contact.vcf');
+    downloadLink.click();
+}
+
+
+
+
 </script>
 
 </body>
