@@ -98,8 +98,6 @@ def update_client(request, random_key_value):
 
 
 from django.http import HttpResponse
-from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Image
 import qrcode
 from io import BytesIO
 from django.core.files.base import ContentFile
