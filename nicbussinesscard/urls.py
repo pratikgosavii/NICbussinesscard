@@ -29,6 +29,7 @@ urlpatterns = [
     path('add-client', add_client, name='add_client'),
     path('update-client/<random_key_value>', update_client, name='update_client'),
     path('delete-client/<client_id>', delete_client, name='delete_client'),
+    path('print_single_qr/<client_id>', print_single_qr, name='print_single_qr'),
     path('list-client/', list_client, name='list_client'),
     path('showcard/<random_key_value>', show_card, name='show_card'),
     path('', dashboard, name='dashboard'),

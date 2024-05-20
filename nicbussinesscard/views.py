@@ -96,6 +96,46 @@ def update_client(request, random_key_value):
 
         
 
+
+from django.http import HttpResponse
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Image
+import qrcode
+from io import BytesIO
+from django.core.files.base import ContentFile
+import base64
+
+
+
+
+def print_single_qr(request, client_id):
+
+    a = client.objects.get(id = client_id)
+
+
+    qr_size = 600
+
+    box_size = qr_size // 4  # You can experiment with different values
+
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=box_size,
+        border=0,
+    )
+    qr.add_data("https://www.nfcmetalcard.com/showcard/" + a.random_key)
+    qr.make(fit=True)
+
+    img = qr.make_image(fill_color="black", back_color="white")
+    buffer = BytesIO()
+    img.save(buffer, format="PNG")
+    buffer.seek(0)
+
+    qr_code_image = base64.b64encode(buffer.getvalue()).decode()
+
+
+    return render(request, 'html_qr_single.html', {'data' : qr_code_image})
+
 @login_required(login_url='login')
 def delete_client(request, client_id):
 
