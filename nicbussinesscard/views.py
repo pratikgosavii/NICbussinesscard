@@ -69,6 +69,16 @@ def add_client(request):
         }
         return render(request, 'add_client.html', context)
 
+
+
+def home(request):
+
+    return render(request, 'index.html')
+
+def contact_us(request):
+
+    return render(request, 'contact.html')
+
         
 import copy
 
