@@ -28,6 +28,7 @@ urlpatterns = [
     path('users/', include('user.urls')),
     path('add-client', add_client, name='add_client'),
     path('home', home, name='home'),
+    path('privacy_policy', privacy_policy, name='privacy_policy'),
     path('contact-us', contact_us, name='contact_us'),
     path('update-client/<random_key_value>', update_client, name='update_client'),
     path('delete-client/<client_id>', delete_client, name='delete_client'),

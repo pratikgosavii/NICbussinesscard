@@ -75,6 +75,10 @@ def home(request):
 
     return render(request, 'index.html')
 
+def privacy_policy(request):
+
+    return render(request, 'privacy_policy.html')
+
 def contact_us(request):
 
     return render(request, 'contact.html')
