@@ -88,7 +88,7 @@
                     <div class="home-content">
                       <div class="row flex-v-align">
                         
-                        <div class="col-sm-12 col-md-5 col-lg-5">
+                        <div class="col-sm-12 col-md-5 col-lg-5 p-0">
                           <div class="home-photo">
                             <div class="hp-inner" style="background-image: url({% static 'img/demo.png' %});">
                             </div>
@@ -269,22 +269,14 @@
         </div>
 
         <!-- Footer -->
-        <footer class="site-footer clearfix col-4 d-flex">
-          <div class="footer-social">
-            <ul class="footer-social-links">
-        
-              <li>
-                <a href="#" target="_blank">Facebook</a>
-              </li>
-
-            </ul>
-          </div>
+        <div class="">
+         
               
           <div class="footer-copyrights col-12">
             
-            <p>  <a href="{% url 'privacy_policy' %}">Privay Policy </a> </p> 
+            <p>  <a style="color:white;" href="{% url 'privacy_policy' %}">Privay Policy </a> </p> 
           </div>
-        </footer>
+        </div>
         <!-- /Footer -->
         
       </div>

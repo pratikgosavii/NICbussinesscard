@@ -1689,7 +1689,7 @@ h3.comment-reply-title:before {
 @media only screen and (max-width: 500px) {
     .home-photo,
     .home-photo.hp-left {
-        width: 90%;
+        width: 100%;
         padding-bottom: calc(90% - 36px);
     }
     .home-text h1 {

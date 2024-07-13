@@ -24,13 +24,6 @@
 
     <div class="lm-animated-bg"></div>
     
-    <!-- Loading animation -->
-    <div class="preloader">
-      <div class="preloader-animation">
-        <div class="preloader-spinner">
-        </div>
-      </div>
-    </div>
     <!-- /Loading animation -->
 
     <!-- Scroll To Top Button -->
@@ -46,9 +39,9 @@
                 
             <!-- Text Logo -->
             <div class="text-logo">
-              <a href="index.html">
-                <div class="logo-symbol">A</div>
-                <div class="logo-text"> Varad </div>
+              <a href="{% url 'home' %}">
+                <div class="logo-symbol">N</div>
+                <div class="logo-text">NFC  <span>Bussiness Metal Card</span></div>
               </a>
             </div>
             <!-- /Text Logo -->
@@ -82,12 +75,7 @@
 
               <div id="content" class="page-content site-content single-post" role="main">
 
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12">
-                    <div id="map" class="map"></div>
-                  </div>
-                </div>
-
+            
                 <div class="row">
                   <div class=" col-xs-12 col-sm-4 ">
                         
@@ -98,7 +86,7 @@
                           <i class="linecons linecons-phone"></i>
                         </div>
                         <div class="ci-text">
-                          <h4>+91 97650 54243</h4>
+                          <h4>+91 95299 81515</h4>
                         </div>
                       </div>
 
@@ -108,7 +96,7 @@
                         </div>
                         <div class="ci-text">
                           <h4>Maharashtra</h4>
-                          <p>RTO road giri nagar, Akola.</p>
+                          <p>A-111-A, H Block, MIDC Rd, Morewadi, Pimpri Colony, Pune- 411018.</p>
                         </div>
                       </div>
                       
@@ -117,7 +105,7 @@
                           <i class="linecons linecons-mail"></i>
                         </div>
                         <div class="ci-text">
-                          <h4><a class="__cf_email__" >pratikgosavi654@gmail.com</a></h4>
+                          <h4><a class="__cf_email__" >itsupport@nfcmetalcard.com</a></h4>
                         </div>
                       </div>
                     </div>
@@ -135,30 +123,15 @@
           </div>
         </div>
 
-        <footer class="site-footer clearfix">
-          <div class="footer-social">
-            <ul class="footer-social-links">
-              <li>
-                <a href="#" target="_blank">Twitter</a>
-              </li>
-
-              <li>
-                <a href="#" target="_blank">Facebook</a>
-              </li>
-
-              <li>
-                <a href="#" target="_blank">Instagram</a>
-              </li>
-            </ul>
-          </div>
+        <!-- Footer -->
+        <div class="">
+         
               
-          <div class="footer-copyrights">
-            <p>© 2020 All rights reserved. LMPixels.</p>
+          <div class="footer-copyrights col-12">
+            
+            <p>  <a style="color:white;" href="{% url 'privacy_policy' %}">Privay Policy </a> </p> 
           </div>
-        </footer>
-        
-      </div>
-    </div>
+        </div>
 
   
 </body>
