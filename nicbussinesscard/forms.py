@@ -6,6 +6,25 @@ from django.contrib.admin.widgets import  AdminDateWidget, AdminTimeWidget, Admi
         
 
 
+class demo_Form(forms.ModelForm):
+    class Meta:
+        model = demo
+        fields = '__all__'
+        widgets = {
+           
+            'name': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'name'
+            }),
+            'price': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'price'
+            }),
+            'remark': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'random_key'
+            }),
+
+        }
+
+
 class client_Form(forms.ModelForm):
     class Meta:
         model = client

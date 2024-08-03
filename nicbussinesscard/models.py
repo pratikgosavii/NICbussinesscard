@@ -8,6 +8,12 @@ from datetime import datetime, timezone
 
 
 
+class demo(models.Model):
+    
+    name = models.CharField(max_length=50)
+    price = models.CharField(max_length=50, null=True, blank=True)
+    remark = models.CharField(max_length=50, null=True, blank=True)
+
 class client(models.Model):
     
     

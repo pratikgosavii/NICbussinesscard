@@ -35,7 +35,7 @@ def generate_key_from_id(instance_id):
 
 
 
-@login_required(login_url='login')
+
 def add_client(request):
 
     if request.method == 'POST':
@@ -91,7 +91,7 @@ def about_us(request):
         
 import copy
 
-@login_required(login_url='login')
+
 def update_client(request, random_key_value):
 
     instance = client.objects.get(random_key=random_key_value)
@@ -153,7 +153,7 @@ def print_single_qr(request, client_id):
 
     return render(request, 'html_qr_single.html', {'data' : qr_code_image})
 
-@login_required(login_url='login')
+
 def delete_client(request, client_id):
 
     client.objects.get(id=client_id).delete()
@@ -161,7 +161,7 @@ def delete_client(request, client_id):
     return HttpResponseRedirect(reverse('list_client'))
 
 
-@login_required(login_url='login')
+
 def list_client(request):
 
     data = client.objects.all()
@@ -169,6 +169,47 @@ def list_client(request):
         'data': data
     }
     return render(request, 'list_client.html', context)
+
+
+
+def add_demo(request):
+
+    if request.method == 'POST':
+
+        forms = demo_Form(request.POST, request.FILES)
+
+        if forms.is_valid():
+            
+           
+            forms.save()
+        
+            return redirect('list_demo')
+        
+        else:
+            print(forms.errors)
+    
+    else:
+
+        forms = demo_Form()
+
+        context = {
+            'form': forms
+        }
+        return render(request, 'add_demo.html', context)
+
+
+
+
+
+def list_demo(request,):
+
+    data = demo.objects.all()
+
+    context = {
+        'data': data
+    }
+
+    return render(request, 'list_Demo.html', context)
 
 
 def show_card(request, random_key_value):
@@ -182,7 +223,7 @@ def show_card(request, random_key_value):
     return render(request, 'card.html', context)
 
 
-@login_required(login_url='login')
+
 def dashboard(request):
 
     data = client.objects.all().count

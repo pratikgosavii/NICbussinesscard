@@ -10,3 +10,4 @@ from .models import *
 
 
 admin.site.register(client)
+admin.site.register(demo)

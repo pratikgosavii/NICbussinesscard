@@ -35,6 +35,10 @@ urlpatterns = [
     path('delete-client/<client_id>', delete_client, name='delete_client'),
     path('print_single_qr/<client_id>', print_single_qr, name='print_single_qr'),
     path('list-client/', list_client, name='list_client'),
+
+    path('add-demo/', add_demo, name='add_demo'),
+    path('list-demo/', list_demo, name='list_demo'),
+
     path('showcard/<random_key_value>', show_card, name='show_card'),
     path('', dashboard, name='dashboard'),
 
