@@ -209,7 +209,7 @@ def list_demo(request,):
         'data': data
     }
 
-    return render(request, 'list_Demo.html', context)
+    return render(request, 'list_demo.html', context)
 
 
 def show_card(request, random_key_value):
