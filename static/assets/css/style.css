@@ -613,10 +613,6 @@ canvas {
     background: #e8e9ef;
 }
 
-.order-table:after {
-    right: -1px;
-}
-
 .order-table:before {
     left: -1px;
 }
