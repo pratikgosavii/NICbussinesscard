@@ -176,7 +176,7 @@ def add_demo(request):
 
     if request.method == 'POST':
 
-        forms = demo_Form(request.POST, request.FILES)
+        forms = demo_Form(request.POST)
 
         if forms.is_valid():
             
@@ -210,6 +210,111 @@ def list_demo(request,):
     }
 
     return render(request, 'list_demo.html', context)
+
+
+
+
+# def add_payment(request):
+
+#     if request.method == 'POST':
+
+
+def add_payment(request, demo_id):
+
+    demo_instance = demo.objects.get(id = demo_id)
+
+    if request.method == 'POST':
+
+
+            
+        updated_request = request.POST.copy()
+        updated_request.update({'demo': demo_instance.id})
+
+        forms = payment_Form(updated_request)
+
+        if forms.is_valid():
+            
+           
+            forms.save()
+        
+            url = reverse('add_payment', args=[demo_instance.id])
+        
+            return redirect(url)
+        
+        else:
+            print(forms.errors)
+    
+    else:
+
+        forms = payment_Form()
+
+        data = payment.objects.filter(demo = demo_instance)
+
+        total_paid = data.aggregate(Sum('amount'))['amount__sum'] or 0
+        remaining_amount = demo_instance.amount - int(total_paid)
+
+        context = {
+            'form': forms,
+            'data': data,
+            'demo_instance' : demo_instance,
+            'total_paid' : total_paid,
+            'remaining_amount' : remaining_amount,
+        }
+        return render(request, 'add_payment.html', context)
+    
+
+
+def update_payment(request, payment_id):
+
+    payment_instance = payment.objects.get(id = payment_id)
+
+    if request.method == 'POST':
+
+
+            
+        updated_request = request.POST.copy()
+        updated_request.update({'demo': payment_instance.demo.id})
+
+        forms = payment_Form(updated_request, instance = payment_instance)
+
+        if forms.is_valid():
+            
+           
+            forms.save()
+
+            url = reverse('add_payment', args=[payment_instance.demo.id])
+        
+            return redirect(url)
+        
+        else:
+            print(forms.errors)
+    
+    else:
+
+        forms = payment_Form(instance = payment_instance)
+
+        context = {
+            'form': forms,
+        }
+        return render(request, 'update_payment.html', context)
+
+
+
+
+def delete_payment(request, payment_id):
+
+    data = payment.objects.get(id = payment_id)
+    data_copy = copy.copy(data)
+    data.delete()
+
+    context = {
+        'data': data
+    }
+
+    url = reverse('add_payment', args=[data_copy.demo.id])
+        
+    return redirect(url)
+
 
 
 def show_card(request, random_key_value):

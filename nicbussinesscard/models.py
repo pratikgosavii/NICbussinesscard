@@ -11,8 +11,18 @@ from datetime import datetime, timezone
 class demo(models.Model):
     
     name = models.CharField(max_length=50)
-    price = models.CharField(max_length=50, null=True, blank=True)
+    amount = models.IntegerField()
+    remark = models.CharField(max_length=50)
+
+
+class payment(models.Model):
+    
+    demo = models.ForeignKey(demo, on_delete=models.CASCADE)
+    amount = models.IntegerField()
+    date = models.DateField(auto_now=False)
     remark = models.CharField(max_length=50, null=True, blank=True)
+
+
 
 class client(models.Model):
     

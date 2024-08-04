@@ -38,6 +38,9 @@ urlpatterns = [
 
     path('add-demo/', add_demo, name='add_demo'),
     path('list-demo/', list_demo, name='list_demo'),
+    path('add-payment/<demo_id>', add_payment, name='add_payment'),
+    path('update-payment/<payment_id>', update_payment, name='update_payment'),
+    path('delete-payment/<payment_id>', delete_payment, name='delete_payment'),
 
     path('showcard/<random_key_value>', show_card, name='show_card'),
     path('', dashboard, name='dashboard'),

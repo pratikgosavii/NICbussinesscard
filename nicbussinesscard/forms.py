@@ -2,6 +2,7 @@ from django import forms
 
 from .models import *
 from django.contrib.admin.widgets import  AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
+from django.forms.widgets import DateTimeInput
 
         
 
@@ -15,12 +16,33 @@ class demo_Form(forms.ModelForm):
             'name': forms.TextInput(attrs={
                 'class': 'form-control', 'id': 'name'
             }),
-            'price': forms.TextInput(attrs={
-                'class': 'form-control', 'id': 'price'
+            'amount': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'amount'
             }),
             'remark': forms.TextInput(attrs={
                 'class': 'form-control', 'id': 'random_key'
             }),
+
+        }
+
+class payment_Form(forms.ModelForm):
+    class Meta:
+        model = payment
+        fields = '__all__'
+        widgets = {
+           
+            'demo': forms.Select(attrs={
+                'class': 'form-control', 'id': 'name'
+            }),
+            'amount': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'amount'
+            }),
+            'remark': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'random_key'
+            }),
+
+            'date': DateTimeInput(attrs={'type': 'date', 'class' : 'form-control'}, format = '%Y-%m-%d'),
+
 
         }
 

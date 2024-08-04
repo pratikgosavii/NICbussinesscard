@@ -66,7 +66,7 @@
                             <tr>
                                 <td class="serial">{{ forloop.counter }}</td>
                                 <td>{{ i.name }}</td>
-                                <td>{{ i.price }}</td>
+                                <td>{{ i.amount }}</td>
                                 <td>{{ i.remark }}</td>
                                 
                                 <td style="display: flex;
@@ -74,6 +74,11 @@
 
                                    
                                    
+                                   <a href="{% url 'add_payment' i.id %}"> <button id="payment-button"  style="background-color: #05386b; border: green; padding: 10px;border-radius: 12px;" type="submit" class="btn-info ">
+                                        <span id="payment-button-amount">Add Payment</span>
+                                    </button>  </a>
+                                   
+                                
                                    <a href=""> <button id="payment-button"  style="background-color: #05386b; border: green; padding: 10px;border-radius: 12px;" type="submit" class="btn-info ">
                                         <span id="payment-button-amount">View</span>
                                     </button>  </a>

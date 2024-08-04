@@ -1,0 +1,243 @@
+{% extends 'base/base.html' %}
+
+
+
+{% block title %}Create Product{% endblock title %}
+
+
+{% block head %}
+
+<style>
+
+    .card-body{
+
+        padding: 8px 26px 8px 13px !important;
+    }
+
+
+
+</style>
+
+
+{% endblock head %}
+
+
+{% block content %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <p> {{ error }} </p>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+<div class="row">
+    <div class="col-lg-12">
+           
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="box-title"> Order Details </h4>
+                        </div>
+                        <div class="card-body--">
+                            <div class="table-stats order-table ov-h">
+                                <table class="table ">
+                                    <thead>
+                                        <tr>
+                                            <th class="serial">#</th>
+                                            <th>Name</th>
+                                            <th>Amount</th>
+                                            <th>Remark</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      
+                                        <tr>
+                                            <td class="serial">{{ forloop.counter }}</td>
+                                            <td>{{ demo_instance.name }}</td>
+                                            <td>{{ demo_instance.amount }}</td>
+                                            <td>{{ demo_instance.remark }}</td>
+                                            
+                                        </tr>
+                                            
+                                           
+                                           
+                                       
+                                    </tbody>
+                                </table>
+                            </div> <!-- /.table-stats -->
+                        </div>
+                    </div> <!-- /.card -->
+                </div>  <!-- /.col-lg-8 -->
+            
+                
+            </div>
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="box-title"> Payment History </h4>
+                        </div>
+                        <div class="card-body--">
+                            <div class="table-stats order-table ov-h">
+                                <table class="table ">
+                                    <thead>
+                                        <tr>
+                                            <th class="serial">#</th>
+                                            <th>Amount</th>
+                                            <th>Remark</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if data %}
+                                        {% for i in data %}
+                                        <tr>
+                                            <td class="serial">{{ forloop.counter }}</td>
+                                            <td>{{ i.amount }}</td>
+                                            <td>{{ i.remark }}</td>
+                                            <td>{{ i.date }}</td>
+                                            
+                                            <td style="display: flex;
+                                            gap: 12px;">  
+            
+                                               
+                                               
+                                            
+                                               <a href="{% url 'update_payment' i.id %}"> <button id="payment-button"  style="background-color: #05386b; border: green; padding: 10px;border-radius: 12px;" type="submit" class="btn-info ">
+                                                    <span id="payment-button-amount">Update</span>
+                                                </button>  </a>
+                                               
+                                            
+                                                <a href="{% url 'delete_payment' i.id %}"> <button id="payment-button"  style="background-color: red; border: green; padding: 10px;border-radius: 12px;" type="submit" class="btn-info ">
+                                                    <span id="payment-button-amount">Delete</span>
+                                                </button>  </a>
+                                               
+            
+                                            </td>
+                                           
+                                           
+                                        </tr>
+                                        {% endfor %}
+                                        {% else %}
+                                            <tr><td>No Record Data</td></tr>
+                                        {% endif %}
+
+                                        <tr>
+                                            <td  style="font-weight: bolder; color : green">
+                                                Total Paid : {{ total_paid }}
+                                            </td>
+                                            <td style="font-weight: bolder; color : green">
+                                                
+                                            </td>
+
+                                            <td  style="font-weight: bolder; color : red">
+                                                Remaining Amount : {{ remaining_amount }}
+                                            </td>
+                                            <td style="font-weight: bolder; color : red">
+                                                
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                    </tbody>
+                                </table>
+                            </div> <!-- /.table-stats -->
+                        </div>
+                    </div> <!-- /.card -->
+                </div>  <!-- /.col-lg-8 -->
+            
+                
+            </div>
+
+            <div class="card">
+
+            <div class="card-body">
+                <!-- Credit Card -->
+                <div id="pay-invoice">
+                    <div class="card-body">
+                        <form action="#" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                           
+                            <div class="form-group">
+                                <label for="name" class="control-label mb-1">Amount</label>
+                                {{ form.amount }}
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="name" class="control-label mb-1">Date</label>
+                                {{ form.date }}
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="name" class="control-label mb-1">Remark</label>
+                                {{ form.remark }}
+                            </div>
+                            
+
+                            <div>
+                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                    <span id="payment-button-amount">Add Payment</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+
+    </div><!--/.col-->
+</div>
+{% endblock content %}
+
+
+{% block js %}
+
+
+<script>
+{% comment %} 
+document.getElementById('asdas').addEventListener('submit', function(evt){
+
+    evt.preventDefault();
+    alert('Form submission intercepted'); // Debugging alert
+
+    var formData = $(this).serialize();
+    alert('Serialized form data: ' + formData); // Debugging alert
+
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'add_other_expense_json' %}", // Use the form's action attribute
+        data: formData,
+        success: function(response) {
+          console.log(response)
+
+          var data = JSON.parse(response)
+
+          if (data.status == "done"){
+            window.location.reload();
+        }
+        else{
+          alert('Wrong contact pratik')
+        }
+            // Handle success response
+        },
+        error: function(error) {
+            alert('Error submitting form.');
+            // Handle error response
+        }
+    });
+}); {% endcomment %}
+
+</script>
+
+
+
+{% endblock js %}
